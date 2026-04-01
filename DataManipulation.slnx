@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="IntroAColecoes/IntroAColecoes.csproj" />
+  <Project Path="02-OperacoesEmColecoes/02-OperacoesEmColecoes.csproj" Id="657a875a-a059-4ed6-a761-a13641245444" />
+  <Project Path="IntroAColecoes/01-IntroAColecoes.csproj" />
 </Solution>
