@@ -3,11 +3,11 @@
 
    Funções que vamos implementar:
    //     [x] Criar as classes para musicas e playlist
-   //     [ ] Listar músicas da playlist
-   //     [ ] Adicionar música à playlist
-   //     [ ] Obter uma música específica da playlist
-   //     [ ] Remover música da playlist
-   //     [ ] Tocar músicas da playlist em modo aleatório 
+   //     [x] Listar músicas da playlist
+   //     [x] Adicionar música à playlist
+   //     [x] Obter uma música específica da playlist
+   //     [x] Remover música da playlist
+   //     [x] Tocar músicas da playlist em modo aleatório 
    //     [ ] Reordenar músicas segundo alguma lógica específica (ex. duração)
    //     [ ] Uma playlist não pode ter músicas repetidas
    //     [ ] Exibir as 10 músicas mais tocadas em todas as playlists (ranking)
@@ -33,6 +33,27 @@ rockNacional.Add(musica4);
 rockNacional.Add(musica5);
 
 ExibirPlaylist(rockNacional);
+
+var musicaEncontrada = rockNacional.ObterPeloTitulo("Eduardo e Mônica");
+if(musicaEncontrada is not null)
+{
+    Console.WriteLine("\nRemovendo música...");
+    rockNacional.Remove(musicaEncontrada);
+} else
+{
+    Console.WriteLine("\nMúsica não encontrada!");
+}
+
+ExibirPlaylist(rockNacional);
+
+var musicaAleatoria = rockNacional.ObterAleatoria();
+if (musicaAleatoria is not null)
+{
+    Console.WriteLine($"\nA música aleatéria é '{musicaAleatoria.Titulo}'");
+}else
+{
+    Console.WriteLine("Playslist vazia!");
+}
 
 void ExibirPlaylist(Playlist playlist)
 {
@@ -72,6 +93,24 @@ class Playlist : ICollection<Musica>
     public bool Contains(Musica item)
     {
         return lista.Contains(item);
+    }
+
+    public Musica? ObterPeloTitulo(string titulo)
+    {
+        foreach(var musica in lista)
+        {
+            if (musica.Titulo == titulo)
+                return musica;
+        }
+        return null;
+    }
+
+    public Musica? ObterAleatoria()
+    {
+        if(lista.Count == 0) return null;
+        var random = new Random();
+        var indiceAleatorio = random.Next(0, Count - 1);
+        return lista[indiceAleatorio];
     }
 
     public void CopyTo(Musica[] array, int arrayIndex)
