@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="02-OperacoesEmColecoes/02-OperacoesEmColecoes.csproj" Id="657a875a-a059-4ed6-a761-a13641245444" />
   <Project Path="03-AbstraindoAFonteDeDados/03-AbstraindoAFonteDeDados.csproj" Id="c82f045b-a901-49d0-961b-68b26316b454" />
+  <Project Path="04-LINQ/04-LINQ.csproj" Id="d0f1dff1-3df3-427f-98b6-72b64c8291bc" />
   <Project Path="IntroAColecoes/01-IntroAColecoes.csproj" />
 </Solution>
