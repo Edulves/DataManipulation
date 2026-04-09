@@ -2,5 +2,7 @@
   <Project Path="02-OperacoesEmColecoes/02-OperacoesEmColecoes.csproj" Id="657a875a-a059-4ed6-a761-a13641245444" />
   <Project Path="03-AbstraindoAFonteDeDados/03-AbstraindoAFonteDeDados.csproj" Id="c82f045b-a901-49d0-961b-68b26316b454" />
   <Project Path="04-LINQ/04-LINQ.csproj" Id="d0f1dff1-3df3-427f-98b6-72b64c8291bc" />
+  <Project Path="05-Strings/05-Strings.csproj" Id="ee17237b-4931-424d-bf1b-f6d8c1afe140" />
+  <Project Path="06-ExpressoesRegulares/06-ExpressoesRegulares.csproj" Id="2995fe5e-a990-44e7-a2ad-d0966c25d26b" />
   <Project Path="IntroAColecoes/01-IntroAColecoes.csproj" />
 </Solution>
