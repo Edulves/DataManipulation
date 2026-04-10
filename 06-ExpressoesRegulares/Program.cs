@@ -1,11 +1,72 @@
-﻿using var arquivo = new FileStream("musicas.csv", FileMode.Open, FileAccess.Read);
+﻿using System.Text.RegularExpressions;
+
+using var arquivo = new FileStream("musicas.csv", FileMode.Open, FileAccess.Read);
 using var stream = new StreamReader(arquivo);
 
 
-var musicas = ObterMusicas(stream)
-    .Take(20);
+/*
+    [x] encontrando artistas com caracteres especiais
+    [x] encontrando títulos com duas palavras
+    [x] encontrando títulos que começão e terminam com a mesma palavra
+    [x] encontrando títulos com letras repetidas
+    [ ] encontrando títulos com números romanos
+ */
 
-ExibirMusicasEmTabela(musicas);
+TitulosComNumerosRomanos();
+
+void TitulosComNumerosRomanos()
+{
+    var regex = new Regex(@"\b[IVXLCDM]+\b");
+    var musicas = ObterMusicas(stream)
+        .Where(m => regex.IsMatch(m.Titulo))
+        .Take(20);
+
+    ExibirMusicasEmTabela(musicas);
+}
+
+void musicasComLetrasRepetidas()
+{
+    var regex = new Regex(@"\w*(\w)\1{1,}");
+    var musicas = ObterMusicas(stream)
+        .Where(m => regex.IsMatch(m.Titulo))
+        .Take(20);
+
+    ExibirMusicasEmTabela(musicas);
+}
+
+void musicasQueComecaoETerminamComAMesmaPalavra()
+{
+    var regex = new Regex(@"^(\w+).*\1$");
+    var musicas = ObterMusicas(stream)
+        .Where(m => regex.IsMatch(m.Titulo))
+        .Take(20);
+
+    ExibirMusicasEmTabela(musicas);
+}
+
+void MusicasComDuasPalavras()
+{
+    var regex = new Regex(@"^\w+\s+\w+$");
+    var musicas = ObterMusicas(stream)
+        .Where(m => regex.IsMatch(m.Titulo))
+        .Take(20);
+
+    ExibirMusicasEmTabela(musicas);
+}
+
+void ArtistasComCaracteresEspeciais()
+{
+    var regex = new Regex(@"[^a-zA-Z0-9 ]");
+
+    var artistas = ObterMusicas(stream)
+        .Where(m => regex.IsMatch(m.Artista))
+        .Select(m => m.Artista)
+        .Distinct()
+        .OrderBy(a => a);
+
+    foreach (var artista in artistas)
+        Console.WriteLine(artista);
+}
 
 void ExibirMusicas(IEnumerable<Musica> musicas)
 {
@@ -47,13 +108,25 @@ IEnumerable<Musica> ObterMusicas(StreamReader stream)
     while (linha is not null)
     {
         var partes = linha.Split(';');
+
+
+        // 0:00
+        int duracao = 350;
+        var match = Regex.Match(linha, @"(\d?\d):(\d\d)");
+        if (match.Success)
+        {
+            var minutos = int.Parse(match.Groups[1].Value);
+            var segundos = int.Parse(match.Groups[2].Value);
+            duracao = (minutos * 60) + segundos;
+        }
+
         if (partes.Length == 5)
         {
             var musica = new Musica()
             {
                 Titulo = string.IsNullOrWhiteSpace(partes[0]) ? "N/A" : partes[0],
                 Artista = string.IsNullOrWhiteSpace(partes[1]) ? "N/A" : partes[1],
-                Duracao = int.TryParse(partes[2], out int duracao) ? duracao : 350,
+                Duracao = duracao,
                 Generos = partes[3].Split(",", StringSplitOptions.TrimEntries),
                 Lancamento = DateTime.TryParse(partes[4], out var data) ? data : DateTime.Today
             };
