@@ -4,5 +4,6 @@
   <Project Path="04-LINQ/04-LINQ.csproj" Id="d0f1dff1-3df3-427f-98b6-72b64c8291bc" />
   <Project Path="05-Strings/05-Strings.csproj" Id="ee17237b-4931-424d-bf1b-f6d8c1afe140" />
   <Project Path="06-ExpressoesRegulares/06-ExpressoesRegulares.csproj" Id="2995fe5e-a990-44e7-a2ad-d0966c25d26b" />
+  <Project Path="07-Serializacao/07-Serializacao.csproj" Id="cda78168-9802-418b-9686-e270807adae8" />
   <Project Path="IntroAColecoes/01-IntroAColecoes.csproj" />
 </Solution>
